@@ -157,13 +157,15 @@ function updateLanguage() {
     renderCalendar();
 }
 
-function changeMonth(increment) {
-    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + increment, 1);
+prevMonthBtn.addEventListener('click', () => {
+    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
     renderCalendar();
-}
+});
 
-prevMonthBtn.addEventListener('click', () => changeMonth(-1));
-nextMonthBtn.addEventListener('click', () => changeMonth(1));
+nextMonthBtn.addEventListener('click', () => {
+    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+    renderCalendar();
+});
 
 closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
@@ -181,30 +183,5 @@ languageToggle.addEventListener('click', () => {
     updateLanguage();
 });
 
-// Add swipe functionality
-let touchStartX = 0;
-let touchEndX = 0;
-
-function handleSwipe() {
-    if (touchStartX - touchEndX > 50) {
-        // Swipe left, go to next month
-        changeMonth(1);
-    }
-    if (touchEndX - touchStartX > 50) {
-        // Swipe right, go to previous month
-        changeMonth(-1);
-    }
-}
-
-calendar.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-calendar.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
-
-// Initial render
 renderCalendar();
 updateLanguage();
