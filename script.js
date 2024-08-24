@@ -46,7 +46,7 @@ const translations = {
         secondaryPreacher: "Второй Проповедник",
         preacher: "Проповедник",
         months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-        days: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб']
+        days: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
     }
 };
 
@@ -132,7 +132,8 @@ function isToday(date) {
 }
 
 function showModal(date, preachers) {
-    modalDate.textContent = date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const formatData = date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    modalDate.textContent = formatData.split(" ").map(el =>el.length > 3 ? el.charAt(0).toUpperCase() + el.slice(1): el).join(" ");
     modalBody.innerHTML = '';
 
     if (date.getDay() === 0) {
