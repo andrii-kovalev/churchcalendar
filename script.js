@@ -46,7 +46,7 @@ const translations = {
         secondaryPreacher: "Второй Проповедник",
         preacher: "Проповедник",
         months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-        days: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+        days: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб']
     }
 };
 
@@ -87,7 +87,7 @@ function renderCalendar() {
         if (date.getDay() === 5) dayElement.classList.add('friday');
         if (isToday(date)) dayElement.classList.add('today');
 
-        const dayNumber = document.createElement('div');
+        const dayNumber = document.createElement('span');
         dayNumber.className = 'day-number';
         dayNumber.textContent = day;
         dayElement.appendChild(dayNumber);
@@ -157,15 +157,13 @@ function updateLanguage() {
     renderCalendar();
 }
 
-prevMonthBtn.addEventListener('click', () => {
-    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+function changeMonth(increment) {
+    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + increment, 1);
     renderCalendar();
-});
+}
 
-nextMonthBtn.addEventListener('click', () => {
-    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
-    renderCalendar();
-});
+prevMonthBtn.addEventListener('click', () => changeMonth(-1));
+nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
 closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
@@ -183,5 +181,30 @@ languageToggle.addEventListener('click', () => {
     updateLanguage();
 });
 
+// Add swipe functionality
+let touchStartX = 0;
+let touchEndX = 0;
+
+function handleSwipe() {
+    if (touchStartX - touchEndX > 50) {
+        // Swipe left, go to next month
+        changeMonth(1);
+    }
+    if (touchEndX - touchStartX > 50) {
+        // Swipe right, go to previous month
+        changeMonth(-1);
+    }
+}
+
+calendar.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+calendar.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+// Initial render
 renderCalendar();
 updateLanguage();

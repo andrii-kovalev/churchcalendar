@@ -105,6 +105,11 @@ body {
 .day-number {
     font-weight: bold;
     margin-bottom: 5px;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .preacher {
@@ -161,7 +166,7 @@ body {
     }
 
     .calendar-day {
-        height: 90px;
+        height: 60px;
     }
 
     .preacher {
