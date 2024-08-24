@@ -73,6 +73,10 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 4px;
+    min-width: 100%; /* Ensure calendar takes full width */
+    transition: opacity 0.5s ease; /* Slower fade effect */
+    padding-bottom: 5px;
+
 }
 
 .calendar-header {
@@ -173,4 +177,32 @@ body {
     .preacher {
         font-size: 0.7rem;
     }
+    .calendar-container {
+        transition: transform 0.3s ease, opacity 0.2s ease; /* Faster slide, slower fade */
+        will-change: transform, opacity;
+        opacity: 1;
+        transform: translateX(0); /* Ensure initial position is set */
+    }
+
+    /* Slide effects */
+    .calendar-container.next {
+        transform: translateX(-60%); /* Shorter slide distance */
+    }
+
+    .calendar-container.prev {
+        transform: translateX(60%); /* Shorter slide distance */
+    }
+    .calendar-wrapper {
+        position: relative;
+        overflow: hidden; /* Hide overflow to keep sliding effect smooth */
+    }
+
+    .calendar.fade-out {
+        opacity: 0;
+    }
+
+    .calendar.fade-in {
+        opacity: 1;
+    }
+
 }

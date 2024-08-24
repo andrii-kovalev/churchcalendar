@@ -183,6 +183,58 @@ languageToggle.addEventListener('click', () => {
     languageToggle.textContent = currentLanguage === 'en' ? 'RU' : 'EN';
     updateLanguage();
 });
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', (event) => {
+    touchStartX = event.touches[0].clientX;
+});
+
+document.addEventListener('touchend', (event) => {
+    touchEndX = event.changedTouches[0].clientX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    if (touchEndX < touchStartX) {
+        // Swiped left
+        goToNextMonth();
+    } else if (touchEndX > touchStartX) {
+        // Swiped right
+        goToPreviousMonth();
+    }
+}
+
+function goToNextMonth() {
+    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+    animateCalendar('next');
+}
+
+function goToPreviousMonth() {
+    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+    animateCalendar('prev');
+}
+
+const calendarContainer = document.querySelector('.calendar-container');
+
+function animateCalendar(direction) {
+    const calendarContainer = document.querySelector('.calendar-container');
+    const calendar = document.querySelector('.calendar');
+
+    calendar.classList.add('fade-out');
+    setTimeout(() => {
+        calendarContainer.classList.add(direction);
+    },  10); // Short delay to ensure fade-out starts
+
+    setTimeout(() => {
+        calendarContainer.classList.remove(direction);
+        calendar.classList.remove('fade-out');
+        calendar.classList.add('fade-in');
+        renderCalendar(); // Update the calendar content
+        }, 70); // Match the duration of the slide animation
+}
+
+
 
 renderCalendar();
 updateLanguage();
