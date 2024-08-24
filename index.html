@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title" data-translate="churchCalendar">Church Calendar</h1>
+            <button id="languageToggle" class="btn language-btn">RU</button>
+            <div class="month-navigation">
+                <button id="prevMonth" class="btn" aria-label="Previous month">&lt;</button>
+                <span id="currentMonthYear" class="current-month"></span>
+                <button id="nextMonth" class="btn" aria-label="Next month">&gt;</button>
+            </div>
+        </div>
+        <div class="card-content">
+            <div id="calendar" class="calendar"></div>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle" data-translate="serviceDetails">Service Details</h2>
+        <p id="modalDate"></p>
+        <div id="modalBody"></div>
+        <button id="closeModal" class="btn" data-translate="close">Close</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

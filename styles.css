@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.month-navigation {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.current-month {
+    margin: 0 10px;
+    font-weight: bold;
+    min-width: 120px;
+    text-align: center;
+}
+
+.btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: #e0e0e0;
+}
+
+.language-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.calendar-header {
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+.calendar-day {
+    border: 1px solid #e0e0e0;
+    padding: 5px;
+    height: 80px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-day.sunday {
+    background-color: #e6e6fa;
+}
+
+.calendar-day.friday {
+    background-color: #e6f3ff;
+}
+
+.calendar-day.today {
+    border: 2px solid #007bff;
+}
+
+.day-number {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.preacher {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main-preacher {
+    color: #007bff;
+}
+
+.secondary-preacher {
+    color: #6c757d;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .month-navigation {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+    }
+
+    .language-btn {
+        position: static;
+        margin-top: 10px;
+    }
+
+    .calendar-day {
+        height: 90px;
+    }
+
+    .preacher {
+        font-size: 0.7rem;
+    }
+}
